@@ -1,0 +1,12 @@
+{
+  "display_name": "st-sd-webui-api",
+  "loading_order": 10,
+  "requires": [],
+  "optional": [],
+  "js": "index.js",
+  "css": "style.css",
+  "author": "SrJuggernaut <jugger@srjuggernaut.dev>",
+  "version": "1.0.0",
+  "homePage": "https://github.com/SrJuggernaut/st-sd-webui-api",
+  "auto_update": true
+}

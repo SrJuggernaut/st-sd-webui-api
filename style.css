@@ -1,0 +1,34 @@
+select:disabled {
+  opacity: 0.5;
+}
+
+.subtitle1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.subtitle2 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.color_red {
+  color: var(--warning);
+}
+
+.number-after-range {
+  width: 100px;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-block: 5px;
+}
+
+.highlight {
+  color: var(--SmartThemeQuoteColor);
+}
