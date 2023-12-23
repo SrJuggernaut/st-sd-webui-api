@@ -37,8 +37,8 @@ export const ensureSettingsExist = async () => {
       url: DEFAULT_API_URL,
       extensionSettings: DEFAULT_EXTENSION_SETTINGS
     }
+    sillyTavernContext.saveSettingsDebounced()
   }
-  sillyTavernContext.saveSettingsDebounced()
 }
 
 export const clearSettings = async () => {
