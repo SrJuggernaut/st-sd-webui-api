@@ -3,8 +3,13 @@ import { base64ToDataUrl, checkBooleanString, checkFloatString, checkIntegerStri
 
 export const registerCommands = () => {
   const sillyTavernContext = window.SillyTavern.getContext()
+  const { extensionSettings } = sillyTavernContext.extensionSettings.stSdWebuiApiSettings
   const imagenHelperText = 'Generate an image using the Stable Diffusion Web UI API. To see the list of available options, use <code>/imagen help</code>'
-  sillyTavernContext.registerSlashCommand('imagen', imageGeneration, [], imagenHelperText, true, true)
+  const command = extensionSettings.command === undefined || typeof extensionSettings.command !== 'string' || extensionSettings.command === '' ? 'imagen' : extensionSettings.command
+  const commandAlias = extensionSettings.commandAlias === undefined || typeof extensionSettings.commandAlias !== 'string' || extensionSettings.commandAlias === '' ? [] : extensionSettings.commandAlias.split(',').map(alias => alias.trim())
+  const interruptGeneration = extensionSettings.interruptGeneration === undefined || typeof extensionSettings.interruptGeneration !== 'boolean' ? true : extensionSettings.interruptGeneration
+  const purgeCommand = extensionSettings.purgeCommand === undefined || typeof extensionSettings.purgeCommand !== 'boolean' ? true : extensionSettings.purgeCommand
+  sillyTavernContext.registerSlashCommand(command, imageGeneration, commandAlias, imagenHelperText, interruptGeneration, purgeCommand)
 }
 
 export const imageGeneration = async (args, value) => {

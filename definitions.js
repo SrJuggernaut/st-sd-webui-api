@@ -1,5 +1,6 @@
 /**
  * @typedef {import('./typedefs.js').GenerationSettings} GenerationSettings
+ * @typedef {import('./typedefs.js').ExtensionSettings} ExtensionSettings
  */
 
 /**
@@ -48,6 +49,18 @@ export const DEFAULT_GENERATION_SETTINGS = {
   do_not_save_grid: false,
   save_images: true,
   send_images: true
+}
+
+/**
+ * Default extension settings.
+ * @type {Partial<ExtensionSettings>}
+ */
+
+export const DEFAULT_EXTENSION_SETTINGS = {
+  command: 'imagen',
+  commandAlias: '',
+  interruptGeneration: true,
+  purgeCommand: true
 }
 
 export const DEFAULT_API_URL = 'http://127.0.0.1:7860/'

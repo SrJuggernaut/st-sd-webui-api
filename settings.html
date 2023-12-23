@@ -5,137 +5,178 @@
       <div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div>
     </div>
     <div class="inline-drawer-content">
-      <div style="margin-block: 10px;">
-        <div class="subtitle1">Connection Settings&nbsp;<span
-            class="fa-solid fa-triangle-exclamation opacity50p color_red"
+      <details class="st-sd-webui-api-details" name="st-sd-webui-api-details">
+        <summary class="subtitle1">Connection Settings&nbsp;
+          <span class="fa-solid fa-triangle-exclamation opacity50p color_red fa-sm"
             title="Run stable diffusion webui api with the flags '--api --cors-allow-origins *'. Since this extension do all the calls from the client side,it will be required to allow all origins.">
           </span>
-        </div>
-        <label for="st-sd-webui-api-url">
-          <span>Stable diffusion webui url&nbsp;<span class="fa-solid fa-circle-info opacity50p"
-              title="Stable diffusion webui url without slash at the end.">
-            </span></span>
-          <div class="flex-container flexnowrap">
-            <input type="text" id="st-sd-webui-api-url" class="text_pole" placeholder="http://127.0.0.1:7860" />
-          </div>
-        </label>
-        <label for="st-sd-webui-api-model">
-          <span>Stable diffusion Model&nbsp;<span class="fa-solid fa-circle-info opacity50p"
-              title="Stable diffusion webui checkpoint model. Refresh to view available models or model changes from another device. Scan to ask the server to scan for new models.">
-            </span></span>
-          <div class="flex-container flexnowrap" style="align-items: center;">
-            <select id="st-sd-webui-api-model" style="margin-top: 5px;">
-            </select>
-            <button type="button" id="st-sd-webui-api-model-refresh" class="menu_button menu_button_icon">
-              <i class="fa-solid fa-rotate"></i>
-              <span data-i18n="Refresh">
-                Refresh
-              </span>
-            </button>
-            <button type="button" id="st-sd-webui-api-model-scan" class="menu_button menu_button_icon">
-              <i class="fa-solid fa-server"></i>
-              <i class="fa-solid fa-rotate"></i>
-              <span data-i18n="Scan">
-                Scan
-              </span>
-            </button>
-          </div>
-        </label>
-        <div class="subtitle1">Generation Settings</div>
-        <label for="st-sd-webui-api-sampler">
-          <span>Sampler</span>
-          <div class="flex-container flexnowrap" style="align-items: center;">
-            <select id="st-sd-webui-api-sampler" style="margin-top: 5px;">
-            </select>
-          </div>
-        </label>
-        <label for="st-sd-webui-api-cfg-scale-value">
-          <span>CFG scale</span>
-          <div class="flex-container flexnowrap" style="align-items: center;">
-            <input type="range" id="st-sd-webui-api-cfg-scale" min="1" max="30" step="0.5" />
-            <input type="number" id="st-sd-webui-api-cfg-scale-value" class="text_pole number-after-range" min="1"
-              max="30" step="0.5" />
-          </div>
-        </label>
-        <label for="st-sd-webui-api-sampling-steps">
-          <span>Sampling steps</span>
-          <div class="flex-container flexnowrap" style="align-items: center;">
-            <input type="range" id="st-sd-webui-api-sampling-steps" min="1" max="100" step="1" />
-            <input type="number" id="st-sd-webui-api-sampling-steps-value" class="text_pole number-after-range" min="1"
-              max="150" step="1" />
-          </div>
-        </label>
-        <label for="st-sd-webui-api-width">
-          <span>Width</span>
-          <div class="flex-container flexnowrap" style="align-items: center;">
-            <input type="range" id="st-sd-webui-api-width" min="64" max="2048" step="64" />
-            <input type="number" id="st-sd-webui-api-width-value" class="text_pole number-after-range" min="64"
-              max="2048" step="64" />
-          </div>
-        </label>
-        <label for="st-sd-webui-api-height">
-          <span>Height</span>
-          <div class="flex-container flexnowrap" style="align-items: center;">
-            <input type="range" id="st-sd-webui-api-height" min="64" max="2048" step="64" />
-            <input type="number" id="st-sd-webui-api-height-value" class="text_pole number-after-range" min="64"
-              max="2048" step="64" />
-          </div>
-        </label>
-        <div class="checkbox-container">
-          <label class="checkbox_label" for="st-sd-webui-api-restore-faces">
-            <input type="checkbox" id="st-sd-webui-api-restore-faces" />
-            Restore Faces
-          </label>
-          <label class="checkbox_label" for="st-sd-webui-api-enable-hr">
-            <input type="checkbox" id="st-sd-webui-api-enable-hr" />
-            Highres Fix
+        </summary>
+        <div class="content">
+          <label for="st-sd-webui-api-url">
+            <span>Stable diffusion webui url&nbsp;<span class="fa-solid fa-circle-info opacity50p"
+                title="Stable diffusion webui url without slash at the end.">
+              </span></span>
+            <div class="flex-container flexnowrap">
+              <input type="text" id="st-sd-webui-api-url" class="text_pole" placeholder="http://127.0.0.1:7860" />
+            </div>
           </label>
         </div>
-        <div id="st-sd-webui-api-hr-settings">
-          <div class="subtitle2">
-            Highres Fix Settings
-          </div>
-          <label for="st-sd-webui-api-hr-upscaler">
-            <span>Upscaler</span>
+      </details>
+      <details class="st-sd-webui-api-details" name="st-sd-webui-api-details">
+        <summary class="subtitle1">Generation Settings</summary>
+        <div class="content">
+          <label for="st-sd-webui-api-model">
+            <span>Stable diffusion Model&nbsp;<span class="fa-solid fa-circle-info opacity50p"
+                title="Stable diffusion webui checkpoint model. Refresh to view available models or model changes from another device. Scan to ask the server to scan for new models.">
+              </span></span>
             <div class="flex-container flexnowrap" style="align-items: center;">
-              <select id="st-sd-webui-api-hr-upscaler" style="margin-top: 5px;">
+              <select id="st-sd-webui-api-model" style="margin-top: 5px;">
+              </select>
+              <button type="button" id="st-sd-webui-api-model-refresh" class="menu_button menu_button_icon">
+                <i class="fa-solid fa-rotate"></i>
+                <span data-i18n="Refresh">
+                  Refresh
+                </span>
+              </button>
+              <button type="button" id="st-sd-webui-api-model-scan" class="menu_button menu_button_icon">
+                <i class="fa-solid fa-server"></i>
+                <i class="fa-solid fa-rotate"></i>
+                <span data-i18n="Scan">
+                  Scan
+                </span>
+              </button>
+            </div>
+          </label>
+          <label for="st-sd-webui-api-sampler">
+            <span>Sampler</span>
+            <div class="flex-container flexnowrap" style="align-items: center;">
+              <select id="st-sd-webui-api-sampler" style="margin-top: 5px;">
               </select>
             </div>
           </label>
-          <label for="st-sd-webui-api-hr-sampler">
-            <span>Sampler<span class="fa-solid fa-circle-info opacity50p"
-                title="If you want to use a different sampler than the one used for the generation, you can select it here."></span></span>
+          <label for="st-sd-webui-api-cfg-scale-value">
+            <span>CFG scale</span>
             <div class="flex-container flexnowrap" style="align-items: center;">
-              <select id="st-sd-webui-api-hr-sampler" style="margin-top: 5px;">
-              </select>
+              <input type="range" id="st-sd-webui-api-cfg-scale" min="1" max="30" step="0.5" />
+              <input type="number" id="st-sd-webui-api-cfg-scale-value" class="text_pole number-after-range" min="1"
+                max="30" step="0.5" />
             </div>
           </label>
-          <label for="st-sd-webui-api-hr-scale-value">
-            <span>Scale</span>
+          <label for="st-sd-webui-api-sampling-steps">
+            <span>Sampling steps</span>
             <div class="flex-container flexnowrap" style="align-items: center;">
-              <input type="range" id="st-sd-webui-api-hr-scale" min="1" max="4" step="0.05" />
-              <input type="number" id="st-sd-webui-api-hr-scale-value" class="text_pole number-after-range" min="1"
-                max="4" step="0.05" />
+              <input type="range" id="st-sd-webui-api-sampling-steps" min="1" max="100" step="1" />
+              <input type="number" id="st-sd-webui-api-sampling-steps-value" class="text_pole number-after-range"
+                min="1" max="150" step="1" />
             </div>
           </label>
-          <label for="st-sd-webui-api-hr-denoising-strength-value">
-            <span>Denoising Strength</span>
+          <label for="st-sd-webui-api-width">
+            <span>Width</span>
             <div class="flex-container flexnowrap" style="align-items: center;">
-              <input type="range" id="st-sd-webui-api-hr-denoising-strength" min="0" max="1" step="0.01" />
-              <input type="number" id="st-sd-webui-api-hr-denoising-strength-value" class="text_pole number-after-range"
-                min="0" max="1" step="0.01" />
+              <input type="range" id="st-sd-webui-api-width" min="64" max="2048" step="64" />
+              <input type="number" id="st-sd-webui-api-width-value" class="text_pole number-after-range" min="64"
+                max="2048" step="64" />
             </div>
           </label>
-          <label for="st-sd-webui-api-hr-steps">
-            <span>Steps<span class="fa-solid fa-circle-info opacity50p"
-                title="Number of sampling steps for upscaled image, if 0, it will use the same number of steps as the generation."></span></span>
+          <label for="st-sd-webui-api-height">
+            <span>Height</span>
             <div class="flex-container flexnowrap" style="align-items: center;">
-              <input type="range" id="st-sd-webui-api-hr-steps" min="0" max="150" step="1" />
-              <input type="number" id="st-sd-webui-api-hr-steps-value" class="text_pole number-after-range" min="0"
-                max="150" step="1" />
+              <input type="range" id="st-sd-webui-api-height" min="64" max="2048" step="64" />
+              <input type="number" id="st-sd-webui-api-height-value" class="text_pole number-after-range" min="64"
+                max="2048" step="64" />
             </div>
           </label>
+          <div class="checkbox-container">
+            <label class="checkbox_label" for="st-sd-webui-api-restore-faces">
+              <input type="checkbox" id="st-sd-webui-api-restore-faces" />
+              Restore Faces
+            </label>
+            <label class="checkbox_label" for="st-sd-webui-api-enable-hr">
+              <input type="checkbox" id="st-sd-webui-api-enable-hr" />
+              Highres Fix
+            </label>
+          </div>
+          <div id="st-sd-webui-api-hr-settings">
+            <div class="subtitle2">
+              Highres Fix Settings
+            </div>
+            <label for="st-sd-webui-api-hr-upscaler">
+              <span>Upscaler</span>
+              <div class="flex-container flexnowrap" style="align-items: center;">
+                <select id="st-sd-webui-api-hr-upscaler" style="margin-top: 5px;">
+                </select>
+              </div>
+            </label>
+            <label for="st-sd-webui-api-hr-sampler">
+              <span>Sampler<span class="fa-solid fa-circle-info opacity50p"
+                  title="If you want to use a different sampler than the one used for the generation, you can select it here."></span></span>
+              <div class="flex-container flexnowrap" style="align-items: center;">
+                <select id="st-sd-webui-api-hr-sampler" style="margin-top: 5px;">
+                </select>
+              </div>
+            </label>
+            <label for="st-sd-webui-api-hr-scale-value">
+              <span>Scale</span>
+              <div class="flex-container flexnowrap" style="align-items: center;">
+                <input type="range" id="st-sd-webui-api-hr-scale" min="1" max="4" step="0.05" />
+                <input type="number" id="st-sd-webui-api-hr-scale-value" class="text_pole number-after-range" min="1"
+                  max="4" step="0.05" />
+              </div>
+            </label>
+            <label for="st-sd-webui-api-hr-denoising-strength-value">
+              <span>Denoising Strength</span>
+              <div class="flex-container flexnowrap" style="align-items: center;">
+                <input type="range" id="st-sd-webui-api-hr-denoising-strength" min="0" max="1" step="0.01" />
+                <input type="number" id="st-sd-webui-api-hr-denoising-strength-value"
+                  class="text_pole number-after-range" min="0" max="1" step="0.01" />
+              </div>
+            </label>
+            <label for="st-sd-webui-api-hr-steps">
+              <span>Steps<span class="fa-solid fa-circle-info opacity50p"
+                  title="Number of sampling steps for upscaled image, if 0, it will use the same number of steps as the generation."></span></span>
+              <div class="flex-container flexnowrap" style="align-items: center;">
+                <input type="range" id="st-sd-webui-api-hr-steps" min="0" max="150" step="1" />
+                <input type="number" id="st-sd-webui-api-hr-steps-value" class="text_pole number-after-range" min="0"
+                  max="150" step="1" />
+              </div>
+            </label>
+          </div>
         </div>
-      </div>
+      </details>
+      <details class="st-sd-webui-api-details" name="st-sd-webui-api-details">
+        <summary class="subtitle1">Extension Settings
+          <span class="fa-solid fa-circle-info opacity50p fa-sm"
+            title="Any changes to the settings will be applied after refreshing the page.">
+          </span>
+        </summary>
+        <div class="content">
+          <label for="st-sd-webui-api-command">
+            <span>Stable diffusion webui command&nbsp;<span class="fa-solid fa-circle-info opacity50p"
+                title="The slash command to use in Silly Tavern">
+              </span>
+              <div class="flex-container flexnowrap">
+                <input type="text" id="st-sd-webui-api-command" class="text_pole" />
+              </div>
+          </label>
+          <label for="st-sd-webui-api-command-alias">
+            <span>Stable diffusion webui alias&nbsp;<span class="fa-solid fa-circle-info opacity50p"
+                title="List of aliases separated by comma.">
+              </span>
+              <div class="flex-container flexnowrap">
+                <input type="text" id="st-sd-webui-api-command-alias" class="text_pole" />
+              </div>
+          </label>
+          <div class="checkbox-container">
+            <label class="checkbox_label" for="st-sd-webui-api-interrupt-generation">
+              <input type="checkbox" id="st-sd-webui-api-interrupt-generation" />
+              Interrupt Generation
+            </label>
+            <label class="checkbox_label" for="st-sd-webui-api-purge-command">
+              <input type="checkbox" id="st-sd-webui-api-purge-command" />
+              Purge Command
+            </label>
+          </div>
+        </div>
+      </details>
     </div>
   </div>

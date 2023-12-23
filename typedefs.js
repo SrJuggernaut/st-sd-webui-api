@@ -265,6 +265,14 @@ export const Types = {}
  */
 
 /**
+ * @typedef {Object} ExtensionSettings
+ * @property {string} command - The command for the extension.
+ * @property {string} commandAlias - The command aliases for the extension separated by commas.
+ * @property {boolean} interruptGeneration - Whether to interrupt generation.
+ * @property {boolean} purgeCommand - Whether to purge the command.
+ */
+
+/**
   * @typedef {Object} ModelData
   * @property {string} title - The title of the data.
   * @property {string} model_name - The model name of the data.

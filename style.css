@@ -1,34 +1,44 @@
-select:disabled {
-  opacity: 0.5;
-}
+details.st-sd-webui-api-details {
+  summary {
+    cursor: pointer;
+  }
 
-.subtitle1 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  line-height: 1.6;
-}
+  .subtitle1 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.6;
+  }
 
-.subtitle2 {
-  font-size: 1.125rem;
-  font-weight: 700;
-  line-height: 1.6;
-}
+  .subtitle2 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.6;
+  }
 
-.color_red {
-  color: var(--warning);
-}
+  .content {
+    padding: 12px;
+  }
 
-.number-after-range {
-  width: 100px;
-}
+  .number-after-range {
+    width: 100px;
+  }
 
-.checkbox-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  margin-block: 5px;
-}
+  .checkbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-block: 5px;
+  }
 
-.highlight {
-  color: var(--SmartThemeQuoteColor);
+  .highlight {
+    color: var(--SmartThemeQuoteColor);
+  }
+
+  .color_red {
+    color: var(--warning);
+  }
+
+  select:disabled {
+    opacity: 0.5;
+  }
 }
