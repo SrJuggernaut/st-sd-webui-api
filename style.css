@@ -3,6 +3,24 @@ details.st-sd-webui-api-details {
     cursor: pointer;
   }
 
+  .st-sd-webui-api-style-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--SmartThemeBorderColor);
+    border-radius: 5px;
+    padding: 3px 5px;
+    padding: 5px;
+  }
+
+  #st-sd-webui-api-styles-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    border-radius: 5px;
+    gap: 10px;
+  }
+
   .subtitle1 {
     font-size: 1.25rem;
     font-weight: 700;

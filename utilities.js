@@ -51,3 +51,13 @@ export const checkFloatString = (string, defaultValue) => {
 export const base64ToDataUrl = (base64) => {
   return `data:image/png;base64,${base64}`
 }
+
+/**
+ * Sends an alert message with the specified severity.
+ * @param {string} message - The message to be displayed in the alert.
+ * @param {'info'|'warning'|'error'|'success'} severity - The severity level of the alert.
+ */
+export const sendAlert = (message, severity) => {
+  const sillyTavernContext = window.SillyTavern.getContext()
+  sillyTavernContext.executeSlashCommands(`/echo title="SillyTavern Stable Diffusion Webui API" severity=${severity} ${message}`)
+}

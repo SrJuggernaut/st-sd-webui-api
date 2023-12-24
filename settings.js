@@ -1,9 +1,9 @@
-import { getCurrentModel, getModels, getSamplers, getUpScalers, scanModels, setModel } from './api.js'
+import { getCurrentModel, getModels, getSamplers, getStyles, getUpScalers, scanModels, setModel } from './api.js'
 import { DEFAULT_API_URL, DEFAULT_EXTENSION_SETTINGS, DEFAULT_GENERATION_SETTINGS, EXTENSION_ID } from './definitions.js'
+import { sendAlert } from './utilities.js'
 
 export const setupSettings = async () => {
   console.log('st-sd-webui-api[settings]: setting up settings...')
-  // clearSettings()
   await ensureSettingsExist()
   await renderExtensionSettings()
   await setupUrlInput()
@@ -20,10 +20,12 @@ export const setupSettings = async () => {
   await setupHrScaleRange()
   await setupHrDenoisingStrengthRange()
   await setupHrStepsRange()
+  await setupStyles()
   await setupCommand()
   await setupAlias()
   await setupInterruptGenerationCheckbox()
   await setupPurgeCommandCheckbox()
+  await restartSettingsButton()
   console.log('st-sd-webui-api[settings]: settings setup complete')
 }
 
@@ -46,6 +48,7 @@ export const clearSettings = async () => {
   const sillyTavernContext = window.SillyTavern.getContext()
   sillyTavernContext.extensionSettings.stSdWebuiApiSettings = undefined
   sillyTavernContext.saveSettingsDebounced()
+  sendAlert('Settings cleared, please reload the page to continue', 'warning')
 }
 
 export const renderExtensionSettings = async () => {
@@ -554,6 +557,86 @@ export const setupHrStepsRange = async () => {
   }
 }
 
+export const setupStyles = async () => {
+  const sillyTavernContext = window.SillyTavern.getContext()
+  const { stSdWebuiApiSettings } = sillyTavernContext.extensionSettings
+
+  const styleToAddSelect = document.getElementById('st-sd-webui-api-style-to-add')
+  const selectedStyleData = document.getElementById('st-sd-webui-api-selected-style-data')
+  const addStyleButton = document.getElementById('st-sd-webui-api-add-style')
+  const refreshStylesButton = document.getElementById('st-sd-webui-api-refresh-styles')
+  const stylesContainer = document.getElementById('st-sd-webui-api-styles-container')
+
+  const styles = await getStyles()
+
+  const appendStyleToSelect = (style) => {
+    const option = document.createElement('option')
+    option.innerText = style.name
+    option.value = style.name
+    styleToAddSelect.appendChild(option)
+  }
+
+  const renderStyle = (style, index) => {
+    const styleContainer = document.createElement('div')
+    const styleTag = document.createElement('span')
+    const removeStyleButton = document.createElement('button')
+    styleContainer.classList.add('st-sd-webui-api-style-container')
+    removeStyleButton.classList.add('menu_button', 'menu_button_icon')
+    styleTag.innerText = style
+    removeStyleButton.innerHTML = '<span class="fas fa-trash"></span>'
+    removeStyleButton.onclick = () => {
+      stSdWebuiApiSettings.generationSettings.styles.splice(index, 1)
+      stylesContainer.innerHTML = ''
+      stSdWebuiApiSettings.generationSettings.styles.forEach(renderStyle)
+      sillyTavernContext.saveSettingsDebounced()
+    }
+    styleContainer.appendChild(styleTag)
+    styleContainer.appendChild(removeStyleButton)
+    stylesContainer.appendChild(styleContainer)
+  }
+
+  styles.forEach(appendStyleToSelect)
+
+  styleToAddSelect.onchange = (event) => {
+    const value = event.target.value
+    if (value === '') {
+      selectedStyleData.innerHTML = ''
+      return
+    }
+    const style = styles.find((style) => style.name === value)
+    selectedStyleData.innerHTML = `<p><strong>Prompt:</strong> ${style.prompt}</p><p><strong>Negative Prompt:</strong> ${style.negative_prompt}</p>`
+  }
+
+  addStyleButton.onclick = async () => {
+    const styleToAdd = styleToAddSelect.value
+
+    if (styleToAdd === '' || stSdWebuiApiSettings.generationSettings.styles.includes(styleToAdd)) {
+      return
+    }
+    stSdWebuiApiSettings.generationSettings.styles.push(styleToAdd)
+    stylesContainer.innerHTML = ''
+    stSdWebuiApiSettings.generationSettings.styles.forEach(renderStyle)
+    sillyTavernContext.saveSettingsDebounced()
+  }
+
+  refreshStylesButton.onclick = async () => {
+    styleToAddSelect.innerHTML = ''
+    try {
+      styleToAddSelect.disabled = true
+      const styles = await getStyles()
+      styles.forEach(appendStyleToSelect)
+      styleToAddSelect.value = ''
+      selectedStyleData.innerHTML = ''
+    } catch (error) {
+      console.error('st-sd-webui-api[settings-refreshStylesButton]:', error)
+    } finally {
+      styleToAddSelect.disabled = false
+    }
+  }
+
+  stSdWebuiApiSettings.generationSettings.styles.forEach(renderStyle)
+}
+
 export const setupCommand = async () => {
   const sillyTavernContext = window.SillyTavern.getContext()
   const { stSdWebuiApiSettings } = sillyTavernContext.extensionSettings
@@ -611,5 +694,13 @@ export const setupPurgeCommandCheckbox = async () => {
   purgeCommandCheckbox.onchange = (event) => {
     stSdWebuiApiSettings.extensionSettings.purgeCommand = event.target.checked
     sillyTavernContext.saveSettingsDebounced()
+  }
+}
+
+export const restartSettingsButton = async () => {
+  const restartButton = document.getElementById('st-sd-webui-api-restart-settings')
+  restartButton.onclick = async () => {
+    await clearSettings()
+    await setupSettings()
   }
 }

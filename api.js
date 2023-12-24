@@ -125,7 +125,7 @@ export const getUpScalers = async () => {
 
 /**
  * Retrieves the prompt styles from the Stable diffusion Webui API.
- * @returns {Promise<Object>} A promise that resolves to the prompt styles object.
+ * @returns {Promise<Style[]>} A promise that resolves to the prompt styles object.
  */
 export const getStyles = async () => {
   const sillyTavernContext = window.SillyTavern.getContext()

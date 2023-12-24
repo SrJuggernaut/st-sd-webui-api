@@ -141,6 +141,31 @@
               </div>
             </label>
           </div>
+          <div class="subtitle2">
+            Styles
+          </div>
+          <label for="st-sd-webui-api-style-to-add">
+            <span>Style to add</span>
+            <div class="flex-container flexnowrap" style="align-items: center;">
+              <select id="st-sd-webui-api-style-to-add" style="margin-top: 5px;">
+              </select>
+              <button type="button" id="st-sd-webui-api-add-style" class="menu_button menu_button_icon">
+                <i class="fa-solid fa-plus"></i>
+                <span data-i18n="Add">
+                  Add
+                </span>
+              </button>
+              <button type="button" id="st-sd-webui-api-refresh-styles" class="menu_button menu_button_icon">
+                <i class="fa-solid fa-rotate"></i>
+                <span data-i18n="Refresh">
+                  Refresh
+                </span>
+              </button>
+            </div>
+          </label>
+          <div id="st-sd-webui-api-selected-style-data">
+          </div>
+          <div id="st-sd-webui-api-styles-container"></div>
         </div>
       </details>
       <details class="st-sd-webui-api-details" name="st-sd-webui-api-details">
@@ -175,6 +200,17 @@
               <input type="checkbox" id="st-sd-webui-api-purge-command" />
               Purge Command
             </label>
+          </div>
+          <div class="flex-container flexwrap">
+            <small>
+              Restart Settings will restart the extension and apply any changes made to the settings.
+            </small>
+            <button type="button" id="st-sd-webui-api-restart-settings" class="menu_button menu_button_icon">
+              <i class="fa-solid fa-rotate"></i>
+              <span data-i18n="Restart Settings">
+                Restart Settings
+              </span>
+            </button>
           </div>
         </div>
       </details>
