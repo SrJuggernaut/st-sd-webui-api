@@ -1,5 +1,5 @@
 import { generateImage, uploadImage } from './api.js'
-import { base64ToDataUrl, checkBooleanString, checkFloatString, checkIntegerString, sendAlert } from './utilities.js'
+import { base64ToDataUrl, checkBooleanString, checkFloatString, checkIntegerString, parseAlwaysonScripts, sendAlert } from './utilities.js'
 
 export const registerCommands = () => {
   const sillyTavernContext = window.SillyTavern.getContext()
@@ -30,6 +30,7 @@ export const imageGeneration = async (args, value) => {
     if (extensionSettings.interruptGeneration) {
       sillyTavernContext.deactivateSendButtons()
     }
+
     if (value === undefined || value === '') {
       throw new Error('You must provide a prompt to generate an image.')
     }
@@ -61,8 +62,12 @@ export const imageGeneration = async (args, value) => {
       do_not_save_samples: args.doNotSaveSamples !== undefined ? checkBooleanString(args.doNotSaveSamples, generationSettings.do_not_save_samples) : generationSettings.do_not_save_samples,
       do_not_save_grid: args.doNotSaveGrid !== undefined ? checkBooleanString(args.doNotSaveGrid, generationSettings.do_not_save_grid) : generationSettings.do_not_save_grid,
       save_images: args.saveImages !== undefined ? checkBooleanString(args.saveImages, generationSettings.save_images) : generationSettings.save_images,
-      send_images: args.sendImages !== undefined ? checkBooleanString(args.sendImages, generationSettings.send_images) : generationSettings.send_images
+      send_images: args.sendImages !== undefined ? checkBooleanString(args.sendImages, generationSettings.send_images) : generationSettings.send_images,
+      alwayson_scripts: args.alwaysonScripts !== undefined ? parseAlwaysonScripts(args.alwaysonScripts) : generationSettings.alwayson_scripts !== undefined || generationSettings.alwayson_scripts !== '' ? parseAlwaysonScripts(generationSettings.alwayson_scripts) : undefined
     }
+
+    console.log('st-sd-webui-api: alwaysonScripts', args.alwaysonScripts)
+    console.log('st-sd-webui-api: composedGenerationSettings', composedGenerationSettings)
 
     const response = await generateImage(composedGenerationSettings)
 

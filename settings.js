@@ -21,6 +21,7 @@ export const setupSettings = async () => {
   await setupHrDenoisingStrengthRange()
   await setupHrStepsRange()
   await setupStyles()
+  await setupAlwaysonScripts()
   await setupCommand()
   await setupAlias()
   await setupInterruptGenerationCheckbox()
@@ -635,6 +636,24 @@ export const setupStyles = async () => {
   }
 
   stSdWebuiApiSettings.generationSettings.styles.forEach(renderStyle)
+}
+
+export const setupAlwaysonScripts = async () => {
+  const sillyTavernContext = window.SillyTavern.getContext()
+  const { stSdWebuiApiSettings } = sillyTavernContext.extensionSettings
+
+  const alwaysonScriptsTextarea = document.getElementById('st-sd-webui-api-alwayson-scripts')
+  alwaysonScriptsTextarea.value = stSdWebuiApiSettings.generationSettings.alwayson_scripts
+  alwaysonScriptsTextarea.onchange = (event) => {
+    stSdWebuiApiSettings.generationSettings.alwayson_scripts = event.target.value
+    sillyTavernContext.saveSettingsDebounced()
+  }
+  alwaysonScriptsTextarea.onblur = (event) => {
+    const value = event.target.value
+    if (value === '' || value === undefined) {
+      event.target.value = ''
+    }
+  }
 }
 
 export const setupCommand = async () => {

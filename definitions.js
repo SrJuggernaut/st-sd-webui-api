@@ -48,7 +48,9 @@ export const DEFAULT_GENERATION_SETTINGS = {
   do_not_save_samples: false,
   do_not_save_grid: false,
   save_images: true,
-  send_images: true
+  send_images: true,
+  // Allwayson_scripts
+  alwayson_scripts: ''
 }
 
 /**

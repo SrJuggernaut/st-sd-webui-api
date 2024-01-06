@@ -262,6 +262,7 @@ export const Types = {}
  * @property {boolean} do_not_save_grid - Whether to not save the generated grid.
  * @property {boolean} save_images - Whether to save the generated images.
  * @property {boolean} send_images - Whether to send the generated images.
+ * @property {string} [alwayson_scripts] - Whether to enable alwayson scripts.
  */
 
 /**

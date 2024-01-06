@@ -61,3 +61,21 @@ export const sendAlert = (message, severity) => {
   const sillyTavernContext = window.SillyTavern.getContext()
   sillyTavernContext.executeSlashCommands(`/echo title="SillyTavern Stable Diffusion Webui API" severity=${severity} ${message}`)
 }
+
+/**
+ * Parses the AlwaysOn scripts.
+ * @param {string} alwaysonScripts - The AlwaysOn scripts to be parsed.
+ * @returns {object} - The parsed AlwaysOn scripts.
+ * @throws {Error} - If the AlwaysOn scripts cannot be parsed.
+ */
+export const parseAlwaysonScripts = (alwaysonScripts) => {
+  if (alwaysonScripts === undefined || typeof alwaysonScripts !== 'string' || alwaysonScripts === '') {
+    throw new Error('The AlwaysOn scripts are undefined, not a string or empty.')
+  }
+  try {
+    const parsed = JSON.parse(alwaysonScripts)
+    return parsed
+  } catch (error) {
+    error.message = `Error parsing AlwaysOn scripts: ${error.message}`
+  }
+}

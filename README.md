@@ -63,6 +63,7 @@ The `/imagen` command allows you to overwrite the default values of the extensio
 - **doNotSaveSamples** Whether to not save samples or not. Example: `/imagen doNotSaveSamples=true`
 - **doNotSaveGrid** Whether to not save the grid or not. Example: `/imagen doNotSaveGrid=true`
 - **saveImages** Whether to save images or not. Example: `/imagen saveImages=true`
+- **alwaysonScripts** Must be a valid JSON with the always on scripts to use. Example: `/imagen alwaysonScripts='{"ADetailer":{"args":[{"ad_model":"mediapipe_face_full"}]}}'`
 
 ### Example
 
