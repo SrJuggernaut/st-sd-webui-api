@@ -15,8 +15,9 @@
  */
 export const getOptions = async () => {
   const sillyTavernContext = window.SillyTavern.getContext()
+  const { stSdWebuiApiSettings } = sillyTavernContext.extensionSettings
   try {
-    const response = await fetch(`${sillyTavernContext.extensionSettings['st-sd-webui-api'].url}/sdapi/v1/options`)
+    const response = await fetch(`${stSdWebuiApiSettings.url}/sdapi/v1/options`)
     const options = await response.json()
     return options
   } catch (error) {
@@ -30,8 +31,9 @@ export const getOptions = async () => {
  */
 export const getModels = async () => {
   const sillyTavernContext = window.SillyTavern.getContext()
+  const { stSdWebuiApiSettings } = sillyTavernContext.extensionSettings
   try {
-    const response = await fetch(`${sillyTavernContext.extensionSettings['st-sd-webui-api'].url}/sdapi/v1/sd-models`)
+    const response = await fetch(`${stSdWebuiApiSettings.url}/sdapi/v1/sd-models`)
     /** @type {ModelData[]} */
     const models = await response.json()
     return models
@@ -48,8 +50,9 @@ export const getModels = async () => {
  */
 export const setModel = async (model) => {
   const sillyTavernContext = window.SillyTavern.getContext()
+  const { stSdWebuiApiSettings } = sillyTavernContext.extensionSettings
   try {
-    await fetch(`${sillyTavernContext.extensionSettings['st-sd-webui-api'].url}/sdapi/v1/options`, {
+    await fetch(`${stSdWebuiApiSettings.url}/sdapi/v1/options`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -69,8 +72,9 @@ export const setModel = async (model) => {
  */
 export const getCurrentModel = async () => {
   const sillyTavernContext = window.SillyTavern.getContext()
+  const { stSdWebuiApiSettings } = sillyTavernContext.extensionSettings
   try {
-    const response = await fetch(`${sillyTavernContext.extensionSettings['st-sd-webui-api'].url}/sdapi/v1/options`)
+    const response = await fetch(`${stSdWebuiApiSettings.url}/sdapi/v1/options`)
     const options = await response.json()
     return options.sd_model_checkpoint
   } catch (error) {
@@ -84,8 +88,9 @@ export const getCurrentModel = async () => {
  */
 export const scanModels = async () => {
   const sillyTavernContext = window.SillyTavern.getContext()
+  const { stSdWebuiApiSettings } = sillyTavernContext.extensionSettings
   try {
-    await fetch(`${sillyTavernContext.extensionSettings['st-sd-webui-api'].url}/sdapi/v1/refresh-checkpoints`, {
+    await fetch(`${stSdWebuiApiSettings.url}/sdapi/v1/refresh-checkpoints`, {
       method: 'POST'
     })
   } catch (error) {
@@ -99,8 +104,9 @@ export const scanModels = async () => {
  */
 export const getSamplers = async () => {
   const sillyTavernContext = window.SillyTavern.getContext()
+  const { stSdWebuiApiSettings } = sillyTavernContext.extensionSettings
   try {
-    const response = await fetch(`${sillyTavernContext.extensionSettings['st-sd-webui-api'].url}/sdapi/v1/samplers`)
+    const response = await fetch(`${stSdWebuiApiSettings.url}/sdapi/v1/samplers`)
     const samplers = await response.json()
     return samplers
   } catch (error) {
@@ -114,8 +120,9 @@ export const getSamplers = async () => {
  */
 export const getUpScalers = async () => {
   const sillyTavernContext = window.SillyTavern.getContext()
+  const { stSdWebuiApiSettings } = sillyTavernContext.extensionSettings
   try {
-    const response = await fetch(`${sillyTavernContext.extensionSettings['st-sd-webui-api'].url}/sdapi/v1/upscalers`)
+    const response = await fetch(`${stSdWebuiApiSettings.url}/sdapi/v1/upscalers`)
     const upscalers = await response.json()
     return upscalers
   } catch (error) {
@@ -129,8 +136,9 @@ export const getUpScalers = async () => {
  */
 export const getStyles = async () => {
   const sillyTavernContext = window.SillyTavern.getContext()
+  const { stSdWebuiApiSettings } = sillyTavernContext.extensionSettings
   try {
-    const response = await fetch(`${sillyTavernContext.extensionSettings['st-sd-webui-api'].url}/sdapi/v1/prompt-styles`)
+    const response = await fetch(`${stSdWebuiApiSettings.url}/sdapi/v1/prompt-styles`)
     const styles = await response.json()
     return styles
   } catch (error) {
@@ -145,8 +153,9 @@ export const getStyles = async () => {
  */
 export const generateImage = async (imageData) => {
   const sillyTavernContext = window.SillyTavern.getContext()
+  const { stSdWebuiApiSettings } = sillyTavernContext.extensionSettings
   try {
-    const response = await fetch(`${sillyTavernContext.extensionSettings['st-sd-webui-api'].url}/sdapi/v1/txt2img`, {
+    const response = await fetch(`${stSdWebuiApiSettings.url}/sdapi/v1/txt2img`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

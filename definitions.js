@@ -65,4 +65,4 @@ export const DEFAULT_EXTENSION_SETTINGS = {
   purgeCommand: true
 }
 
-export const DEFAULT_API_URL = 'http://127.0.0.1:7860/'
+export const DEFAULT_API_URL = 'http://127.0.0.1:7860'
