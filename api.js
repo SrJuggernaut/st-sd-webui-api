@@ -185,7 +185,7 @@ export const uploadImage = async (image, characterName) => {
   const sillyTavernContext = window.SillyTavern.getContext()
   const filename = (new Date().toISOString() + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)).replace(/:/g, '-').replace(/\./g, '-').replace(/_/g, '-').replace(/ /g, '-')
   try {
-    const response = await fetch('/uploadimage', {
+    const response = await fetch('/api/images/upload', {
       method: 'POST',
       headers: {
         ...sillyTavernContext.getRequestHeaders(),
