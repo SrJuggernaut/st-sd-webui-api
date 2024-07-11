@@ -10,6 +10,7 @@ export const setupSettings = async () => {
   await setupModelSelect()
   await setupSamplerSelect()
   await setupCfgScaleRange()
+  await setupSeedInput()
   await setupStepsRange()
   await setupWidthRange()
   await setupHeightRange()
@@ -226,6 +227,28 @@ export const setupCfgScaleRange = async () => {
     if (value === '') {
       event.target.value = stSdWebuiApiSettings.generationSettings.cfg_scale
     }
+  }
+}
+
+export const setupSeedInput = async () => {
+  const sillyTavernContext = window.SillyTavern.getContext()
+  const { stSdWebuiApiSettings } = sillyTavernContext.extensionSettings
+
+  const seedInput = document.getElementById('st-sd-webui-api-seed')
+  const seedValue = stSdWebuiApiSettings.generationSettings.seed
+  seedInput.value = seedValue
+  seedInput.onChange = (event) => {
+    stSdWebuiApiSettings.generationSettings.seed = Number(event.target.value ?? -1)
+    sillyTavernContext.saveSettingsDebounced()
+  }
+  seedInput.onblur = (event) => {
+    let newValue = Number(event.target.value ?? -1)
+    if (isNaN(newValue) || newValue === 0) {
+      newValue = -1
+    }
+    stSdWebuiApiSettings.generationSettings.seed = newValue
+    event.target.value = newValue
+    sillyTavernContext.saveSettingsDebounced()
   }
 }
 

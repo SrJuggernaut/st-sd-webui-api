@@ -56,6 +56,10 @@ details.st-sd-webui-api-details {
     color: var(--warning);
   }
 
+  .full-width {
+    width: 100%;
+  }
+
   select:disabled {
     opacity: 0.5;
   }
