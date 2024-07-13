@@ -2,6 +2,7 @@
  * @typedef {import('./typedefs.js').ModelData} ModelData
  * @typedef {import('./typedefs.js').StableDiffusionWebuiOptions} StableDiffusionWebuiOptions
  * @typedef {import('./typedefs.js').Sampler} Sampler
+ * @typedef {import('./typedefs.js').Scheduler} Scheduler
  * @typedef {import('./typedefs.js').UpScaler} UpScaler
  * @typedef {import('./typedefs.js').GenerationResponse} GenerationResponse
  * @typedef {import('./typedefs.js').GenerationResponseWithInfo} GenerationResponseWithInfo
@@ -111,6 +112,22 @@ export const getSamplers = async () => {
     return samplers
   } catch (error) {
     console.error('st-sd-webui-api[apiCall-getSamplers]:', error)
+  }
+}
+
+/**
+ * Retrieves the list of schedulers from the Stable diffusion Webui API.
+ * @returns {Promise<Scheduler[]>} A promise that resolves to an array of schedulers.
+ */
+export const getSchedulers = async () => {
+  const sillyTavernContext = window.SillyTavern.getContext()
+  const { stSdWebuiApiSettings } = sillyTavernContext.extensionSettings
+  try {
+    const response = await fetch(`${stSdWebuiApiSettings.url}/sdapi/v1/schedulers`)
+    const schedulers = await response.json()
+    return schedulers
+  } catch (error) {
+    console.error('st-sd-webui-api[apiCall-getSchedulers]:', error)
   }
 }
 

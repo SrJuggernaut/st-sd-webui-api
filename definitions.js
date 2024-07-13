@@ -27,6 +27,7 @@ export const DEFAULT_GENERATION_SETTINGS = {
   styles: [],
   seed: -1,
   sampler_name: 'Euler',
+  scheduler: 'automatic',
   batch_size: 1,
   steps: 35,
   cfg_scale: 7,

@@ -1,4 +1,4 @@
-import { getCurrentModel, getModels, getSamplers, getStyles, getUpScalers, scanModels, setModel } from './api.js'
+import { getCurrentModel, getModels, getSamplers, getSchedulers, getStyles, getUpScalers, scanModels, setModel } from './api.js'
 import { DEFAULT_API_URL, DEFAULT_EXTENSION_SETTINGS, DEFAULT_GENERATION_SETTINGS, EXTENSION_ID } from './definitions.js'
 import { sendAlert } from './utilities.js'
 
@@ -9,6 +9,7 @@ export const setupSettings = async () => {
   await setupUrlInput()
   await setupModelSelect()
   await setupSamplerSelect()
+  await setupSchedulerSelect()
   await setupCfgScaleRange()
   await setupSeedInput()
   await setupStepsRange()
@@ -184,6 +185,27 @@ export const setupSamplerSelect = async () => {
     if (value === '') {
       event.target.value = sillyTavernContext.extensionSettings.stSdWebuiApiSettings.generationSettings.sampler_name
     }
+  }
+}
+
+export const setupSchedulerSelect = async () => {
+  const sillyTavernContext = window.SillyTavern.getContext()
+  const { stSdWebuiApiSettings } = sillyTavernContext.extensionSettings
+
+  const schedulerSelect = document.getElementById('st-sd-webui-api-scheduler')
+  const schedulers = await getSchedulers()
+  schedulers.forEach((scheduler) => {
+    const option = document.createElement('option')
+    option.value = scheduler.name
+    option.innerText = scheduler.label
+    if (scheduler.name === stSdWebuiApiSettings.generationSettings.scheduler) {
+      option.selected = true
+    }
+    schedulerSelect.appendChild(option)
+  })
+  schedulerSelect.onchange = (event) => {
+    sillyTavernContext.extensionSettings.stSdWebuiApiSettings.generationSettings.scheduler = event.target.value
+    sillyTavernContext.saveSettingsDebounced()
   }
 }
 

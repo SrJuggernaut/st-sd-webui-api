@@ -9,5 +9,5 @@ const main = async () => {
 }
 
 main()
-  .then(() => console.log('st-sd-webui-api: success'))
-  .catch((error) => console.error(error))
+  .then(() => { console.log('st-sd-webui-api: success') })
+  .catch((error) => { console.error(error) })

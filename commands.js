@@ -6,7 +6,7 @@ export const registerCommands = () => {
   const { extensionSettings } = sillyTavernContext.extensionSettings.stSdWebuiApiSettings
   const imagenHelperText = 'Generate an image using the Stable Diffusion Web UI API. To see the list of available options, use <code>/imagen help</code>'
   const command = extensionSettings.command === undefined || typeof extensionSettings.command !== 'string' || extensionSettings.command === '' ? 'imagen' : extensionSettings.command
-  const commandAlias = extensionSettings.commandAlias === undefined || typeof extensionSettings.commandAlias !== 'string' || extensionSettings.commandAlias === '' ? [] : extensionSettings.commandAlias.split(',').map(alias => alias.trim())
+  const commandAlias = extensionSettings.commandAlias === undefined || typeof extensionSettings.commandAlias !== 'string' || extensionSettings.commandAlias === '' ? [] : extensionSettings.commandAlias.split(',').map((alias) => alias.trim())
   const interruptGeneration = extensionSettings.interruptGeneration === undefined || typeof extensionSettings.interruptGeneration !== 'boolean' ? true : extensionSettings.interruptGeneration
   const purgeCommand = extensionSettings.purgeCommand === undefined || typeof extensionSettings.purgeCommand !== 'boolean' ? true : extensionSettings.purgeCommand
   sillyTavernContext.registerSlashCommand(command, imageGeneration, commandAlias, imagenHelperText, interruptGeneration, purgeCommand)
@@ -38,9 +38,10 @@ export const imageGeneration = async (args, value) => {
     const composedGenerationSettings = {
       prompt: value.trim(),
       negative_prompt: args.negativePrompt !== undefined ? args.negativePrompt : generationSettings.negativePrompt,
-      styles: args.styles !== undefined ? args.styles.split(',').map(style => style.trim()) : generationSettings.styles,
+      styles: args.styles !== undefined ? args.styles.split(',').map((style) => style.trim()) : generationSettings.styles,
       seed: args.seed !== undefined ? checkIntegerString(args.seed, generationSettings.seed) : generationSettings.seed,
       sampler_name: args.samplerName !== undefined ? args.samplerName : generationSettings.sampler_name,
+      scheduler: args.scheduler !== undefined ? args.scheduler : generationSettings.scheduler,
       batch_size: args.batchSize !== undefined ? checkIntegerString(args.batchSize, generationSettings.batch_size) : generationSettings.batch_size,
       steps: args.steps !== undefined ? checkIntegerString(args.steps, generationSettings.steps) : generationSettings.steps,
       cfg_scale: args.cfgScale !== undefined ? checkFloatString(args.cfgScale, generationSettings.cfg_scale) : generationSettings.cfg_scale,
@@ -71,11 +72,11 @@ export const imageGeneration = async (args, value) => {
 
     const response = await generateImage(composedGenerationSettings)
 
-    const imagesDataUrls = response.images.map(image => base64ToDataUrl(image))
+    const imagesDataUrls = response.images.map((image) => base64ToDataUrl(image))
 
-    const uploads = await Promise.allSettled(imagesDataUrls.map(imageDataUrl => uploadImage(imageDataUrl, characterName)))
+    const uploads = await Promise.allSettled(imagesDataUrls.map((imageDataUrl) => uploadImage(imageDataUrl, characterName)))
 
-    const uploadResults = uploads.map(upload => upload.value.path)
+    const uploadResults = uploads.map((upload) => upload.value.path)
 
     uploadResults.forEach((uploadResult, index) => {
       const message = {

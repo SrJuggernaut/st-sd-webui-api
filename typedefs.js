@@ -240,6 +240,7 @@ export const Types = {}
  * @property {string[]} styles - The styles for generation.
  * @property {number} seed - The seed for generation.
  * @property {string} sampler_name - The sampler name for generation.
+ * @property {string} scheduler - The scheduler name for generation.
  * @property {number} batch_size - The batch size for generation.
  * @property {number} steps - The number of steps for generation.
  * @property {number} cfg_scale - The scale for generation.
@@ -291,6 +292,15 @@ export const Types = {}
   * @property {string} options.fugiat_4 - The fugiat_4 option for the sampler.
   * @property {string} options.dob81 - The dob81 option for the sampler.
   * @property {string} options.in866 - The in866 option for the sampler.
+*/
+
+/**
+  * @typedef {Object} Scheduler
+  * @property {string} name - The name of the scheduler.
+  * @property {string} label - The label of the scheduler.
+  * @property {string[]|null} aliases - The aliases of the scheduler.
+  * @property {number} default_rho - The default rho for the scheduler.
+  * @property {boolean} need_inner_model - Whether the scheduler needs an inner model.
 */
 
 /**
